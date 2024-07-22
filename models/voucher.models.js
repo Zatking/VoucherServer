@@ -17,19 +17,16 @@ const voucherSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter the voucher type"],
     MaxLength: 10,
-
   },
   VoucherImage: {
     type: String,
     required: false,
     MaxLength: 255,
-    
   },
   VoucherDescription: {
     type: String,
     required: [true, "Please enter the voucher description"],
     MaxLength: 255,
-
   },
   VoucherStartDate: {
     type: Date,
@@ -54,10 +51,7 @@ const voucherSchema = new mongoose.Schema({
     required: [true, "Please enter the voucher max value"],
     default: 0,
   },
-  VoucherCondition: {
-    type: String,
-    required: [true, "Please enter the voucher condition"],
-  },
+ 
   VoucherQuantity: {
     type: Number,
     required: [true, "Please enter the voucher quantity"],
@@ -69,10 +63,17 @@ const voucherSchema = new mongoose.Schema({
     MaxLength: 10,
 
   },
-  VoucherCretatedBy:{
-   type:mongoose.Schema.Types.ObjectId,
-   ref:"Partner"
+
+  AmountUsed:{
+    type:Number,
+    required: false
   },
+  RemainQuantity:{
+    type:Number,
+    default:999,
+  },
+
+  
   
 
   Timestamp: {
@@ -140,29 +141,6 @@ const cateSchema = new mongoose.Schema({
   
 })
 
-const voucherDetailSchema = new mongoose.Schema({
-  VoucherDetailID: {
-    type: String,
-    required: [true, "Please enter the voucher ID"],
-  },
- 
-  VoucherDetailState:{
-    type: String,
-    required: [true, "Please enter the voucher detail status"],
-  },
-  AmountUsed:{
-    type:Number,
-    required: false
-  },
-  RemainQuantity:{
-    type:Number,
-    default:999,
-  },
-  VoucherOwn:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Voucher"
-  }
-})
 
 const customerSchema = new mongoose.Schema({
   CustomerID:{
