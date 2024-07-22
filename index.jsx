@@ -1,15 +1,17 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
-const Voucher = require('./server/models/voucher.models.jsx')
+const Voucher = require('./models/voucher.models.jsx')
 const mongoose = require('mongoose')
-const voucherRoutes = require('./server/routes/voucher.route.jsx')
+const voucherRoutes = require('./routes/voucher.route.jsx')
 require("dotenv").config();
 
 //middle ware
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
+app.use(cors())
 
-
+const port = process.env.PORT || 3000
 //routes
 app.use('/api/vouchers',voucherRoutes);
 
@@ -85,7 +87,7 @@ app.post('/api/vouchers/:id', async (req, res) => {
 mongoose.connect(process.env.MONGODB_URL)
 .then(() => {
     console.log("Connected to MongoDB")
-    app.listen(3000, () => {
+    app.listen(port, () => {
         console.log("Server is running on port 3000")
     })
 })
