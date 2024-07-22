@@ -4,6 +4,7 @@ const app = express()
 const Voucher = require('./models/voucher.models.jsx')
 const mongoose = require('mongoose')
 const voucherRoutes = require('./routes/voucher.route.jsx')
+const data = require('./data/data.jsx')
 require("dotenv").config();
 
 //middle ware
@@ -84,12 +85,11 @@ app.post('/api/vouchers/:id', async (req, res) => {
 })
 
 //Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URL)
-.then(() => {
-    console.log("Connected to MongoDB")
-    app.listen(port, () => {
-        console.log("Server is running on port 3000")
-    })
-})
-.catch(() =>{console.log("Connection failed")})
-
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+  });
+  
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
+  });
