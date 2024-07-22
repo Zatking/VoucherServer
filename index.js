@@ -1,10 +1,10 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
-const Voucher = require('./models/voucher.models.jsx')
+const Voucher = require('./models/voucher.models.js')
 const mongoose = require('mongoose')
-const voucherRoutes = require('./routes/voucher.route.jsx')
-const data = require('./data/data.jsx')
+const voucherRoutes = require('./routes/voucher.route.js')
+const data = require('./data/data.js')
 require("dotenv").config();
 
 //middle ware

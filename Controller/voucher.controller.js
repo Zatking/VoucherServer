@@ -1,4 +1,4 @@
-const Voucher = require("../models/voucher.models.jsx"); // Import the voucher model
+const Voucher = require("../models/voucher.models.js"); // Import the voucher model
 
 //get all vouchers
 const getVouchers = async (req, res) => {
