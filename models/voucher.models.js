@@ -68,14 +68,13 @@ const voucherSchema = new mongoose.Schema({
     type:Number,
     required: false
   },
-  RemainQuantity:{
-    type:Number,
-    default:999,
+  
+  CreatedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: [true, "Please enter the created by"],
+    ref:"Partner",
+    MaxLength: 50,
   },
-
-  
-  
-
   Timestamp: {
     type: Date,
     default: Date.now,
@@ -93,23 +92,10 @@ const partNerSchema = new mongoose.Schema({
     required: [true, "Please enter the partner name"],
     MaxLength: 50,
   },
-  PartnerEmail:{
-    type: String,
-    required: [true, "Please enter the partner email"],
-    MaxLength: 255,
-
-  },
-  PartnerPhone:{
-    type: String,
-    required: [true, "Please enter the partner phone"],
-    MaxLength: 15,
-
-  },
   TypeOfCompany:{
     type: String,
     required: [true, "Please enter the type of company"],
     MaxLength: 10,
-
   },
   PartnerIcon:{
     type: String,
@@ -134,10 +120,7 @@ const cateSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  VoucherID:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Voucher"
-  }
+
   
 })
 
@@ -178,5 +161,15 @@ const useHistory = new mongoose.Schema({
 
 
 const Voucher = mongoose.model("Voucher", voucherSchema);
+const Partner = mongoose.model("Partner", partNerSchema);
+const Category = mongoose.model("Category", cateSchema);
+const UseHistory = mongoose.model("useHistory", useHistory);
+const Customer = mongoose.model("Customer", customerSchema);
 
-module.exports = Voucher;
+module.exports = {
+  Voucher,
+  Partner,
+  Category,
+  UseHistory,
+  Customer
+}
