@@ -69,12 +69,12 @@ const voucherSchema = new mongoose.Schema({
     required: false
   },
   
-  CreatedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: [true, "Please enter the created by"],
-    ref:"Partner",
-    MaxLength: 50,
-  },
+  // CreatedBy: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: [true, "Please enter the created by"],
+  //   ref:"Partner",
+  //   MaxLength: 50,
+  // },
   Timestamp: {
     type: Date,
     default: Date.now,

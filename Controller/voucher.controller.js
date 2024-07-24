@@ -10,6 +10,7 @@ const getVouchers = async (req, res) => {
   }
 };
 
+
 //get voucher by id
 const getVoucherById = async (req, res) => {
   try {
@@ -20,6 +21,16 @@ const getVoucherById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//
+const UseVoucher = async (req, res) => {
+  try{
+    
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 // Create a new voucher
 const createVoucher = async (req, res) => {
