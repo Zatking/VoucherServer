@@ -10,7 +10,6 @@ const getVouchers = async (req, res) => {
   }
 };
 
-
 //get voucher by id
 const getVoucherById = async (req, res) => {
   try {
@@ -22,20 +21,63 @@ const getVoucherById = async (req, res) => {
   }
 };
 
-//
-const UseVoucher = async (req, res) => {
-  try{
-    
+//getResponse
+const getResponse = async (req, res) => {
+  const [Response, setRepsonse] = useState([]);
+  try {
+    // URL của API bên ngoài
+    const externalApiUrl = 'https://api.example.com/data';
+        
+    // Gửi yêu cầu đến API bên ngoài
+    const response = await fetch(externalApiUrl);
+    if (!response.ok) {
+      // Xử lý lỗi nếu API bên ngoài không trả về thành công
+      throw new Error('Failed to fetch data from external API');
   }
-  catch (error) {
-    res.status(500).json({ message: error.message });
+
+  const data = await response.json();
+
+  // Gửi dữ liệu đến người dùng
+  res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-}
+};
+
 
 // Create a new voucher
 const createVoucher = async (req, res) => {
   try {
-    const voucher = await Voucher.create(req.body);
+    const{VoucherID, VoucherName, VoucherType, VoucherImage, VoucherDescription, VoucherStartDate, VoucherEndDate, VoucherDiscount, VoucherMinValue, VoucherMaxValue, VoucherQuantity, VoucherStatus, AmountUsed, CreatedBy} = req.body;
+    if(!VoucherID || !VoucherName || !VoucherType || !VoucherImage || !VoucherDescription || !VoucherStartDate || !VoucherEndDate || !VoucherDiscount || !VoucherMinValue || !VoucherMaxValue || !VoucherQuantity || !VoucherStatus || !AmountUsed || !CreatedBy){
+    return res.status(400).json({ message: "Điền đầy đủ thông tin voucher" });
+    }
+    if (
+      VoucherDiscount < 0 ||
+      VoucherMinValue < 0 ||
+      VoucherMaxValue < 0 ||
+      VoucherQuantity < 0 ||
+      AmountUsed < 0 ||
+      VoucherDiscount > 100 ||
+      VoucherMinValue > VoucherMaxValue ||
+      VoucherQuantity > 100
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Nhập thông tin voucher không hợp lệ các tham số không được âm" });
+    }
+    
+    if(VoucherQuantity >999)
+    {
+      return res.status(400).json({ message: "Số lượng voucher không được vượt quá 999" });
+    }
+    if(VoucherDiscount =100){
+      return res.status(400).json({ message: "Giảm giá không thể lớn hơn và bằng 100%" });
+    }
+
+
+    
+      const voucher = await Voucher.create(req.body);
     res.status(200).json({ voucher });  
   } catch (error) {
     res.status(500).json({ message: error.message });

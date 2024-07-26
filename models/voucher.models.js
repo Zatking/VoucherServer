@@ -63,18 +63,19 @@ const voucherSchema = new mongoose.Schema({
     MaxLength: 10,
 
   },
+  VoucherCreatedBy: {
+    type:String,
+    ref:"Partner",
+    required: [true],
+    MaxLength: 50
+  },
 
   AmountUsed:{
     type:Number,
     required: false
   },
   
-  // CreatedBy: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: [true, "Please enter the created by"],
-  //   ref:"Partner",
-  //   MaxLength: 50,
-  // },
+
   Timestamp: {
     type: Date,
     default: Date.now,
@@ -101,8 +102,8 @@ const partNerSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  VoucherID:{
-  type:mongoose.Schema.Types.ObjectId,
+  Voucher:{
+  type:String,
   ref:"Voucher"
   }
 })
@@ -113,8 +114,8 @@ const cateSchema = new mongoose.Schema({
     required: [true, "Please enter the category ID"],
   },
   CategoryName:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Partner"
+    type:String,
+    ref:"Voucher"
   },
   CategoryIcon:{
     type: String,
@@ -148,12 +149,12 @@ const useHistory = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  VoucherID:{
-    type:mongoose.Schema.Types.ObjectId,
+  Voucher:{
+    type:String,
     ref:"Voucher"
   },
   CustomerID:{
-    type:mongoose.Schema.Types.ObjectId,
+    type:String,
     ref:"Customer"
   }
 
