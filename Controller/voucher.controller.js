@@ -3,12 +3,45 @@ const Voucher = require("../models/voucher.models.js").Voucher; // Import the vo
 //get all vouchers
 const getVouchers = async (req, res) => {
   try {
-    const vouchers = await Voucher.find({});
+    const vouchers = await Voucher.find({VoucherStatus: 'Available'});
+    const currentDate = Date.now();
+    for (let i = 0; i < vouchers.length; i++) {
+      if (vouchers[i].VoucherEndDate < currentDate) {
+        await Voucher.findByIdAndUpdate(vouchers[i]._id, { VoucherStatus: "Expired" });
+      }
+    }
     res.status(200).json({ vouchers });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
+
+
+//get voucher by created by
+const getVoucherByCreatedBy = async (req, res) => {
+  try {
+    const { CreatedBy } = req.params;
+    const voucher = await Voucher.find({ CreatedBy });
+    res.status(200).json({ voucher });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+//get voucher by voucher type
+const getVoucherByType = async (req, res) => {
+  try {
+    const { VoucherType } = req.params;
+    const voucher = await Voucher.find({ VoucherType });
+    res.status(200).json({ voucher });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 //get voucher by id
 const getVoucherById = async (req, res) => {
@@ -21,28 +54,7 @@ const getVoucherById = async (req, res) => {
   }
 };
 
-//getResponse
-const getResponse = async (req, res) => {
-  const [Response, setRepsonse] = useState([]);
-  try {
-    // URL của API bên ngoài
-    const externalApiUrl = 'https://api.example.com/data';
-        
-    // Gửi yêu cầu đến API bên ngoài
-    const response = await fetch(externalApiUrl);
-    if (!response.ok) {
-      // Xử lý lỗi nếu API bên ngoài không trả về thành công
-      throw new Error('Failed to fetch data from external API');
-  }
 
-  const data = await response.json();
-
-  // Gửi dữ liệu đến người dùng
-  res.json(data);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
 
 
 // Create a new voucher
@@ -125,5 +137,8 @@ module.exports = {
   createVoucher,
   updatedVoucher,
   deleteVoucher,
+  getVoucherByCreatedBy,
+  getVoucherByType,
+  
 };
 

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 // This is the schema for the voucher model
 const voucherSchema = new mongoose.Schema({
  
-  VoucherID: {
+  _id: {
     type: String,
     required: [true, "Please enter the voucher ID"],
     uniqe: true,
@@ -83,7 +83,7 @@ const voucherSchema = new mongoose.Schema({
 });
 
 const partNerSchema = new mongoose.Schema({
-  PartnerID:{
+_id:{
     type: String,
     required: [true, "Please enter the partner ID"],
     MaxLength: 5,
@@ -125,23 +125,8 @@ const cateSchema = new mongoose.Schema({
   
 })
 
-
-const customerSchema = new mongoose.Schema({
-  CustomerID:{
-    type: String,
-    required: [true, "Please enter the customer ID"],
-    MaxLength: 5,
-  },
-  CustomerName:{
-    type: String,
-    required: [true, "Please enter the customer name"],
-    MaxLength: 50,
-  },
-  
-})
-
 const useHistory = new mongoose.Schema({
-  HistoryID:{
+  _id:{
     type: String,
     required:"HS" + [true, "Please enter the history ID"],
   },
@@ -153,10 +138,13 @@ const useHistory = new mongoose.Schema({
     type:String,
     ref:"Voucher"
   },
-  CustomerID:{
+  CustomerName:{
     type:String,
-    ref:"Customer"
-  }
+  },
+  Discount:{
+    type:Number,
+  },
+  
 
 })
 
@@ -165,12 +153,10 @@ const Voucher = mongoose.model("Voucher", voucherSchema);
 const Partner = mongoose.model("Partner", partNerSchema);
 const Category = mongoose.model("Category", cateSchema);
 const UseHistory = mongoose.model("useHistory", useHistory);
-const Customer = mongoose.model("Customer", customerSchema);
 
 module.exports = {
   Voucher,
   Partner,
   Category,
   UseHistory,
-  Customer
 }
