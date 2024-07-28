@@ -18,7 +18,15 @@ const getVouchers = async (req, res) => {
 
 
 
-
+//delete all vouchers 
+const deleteAllVouchers = async (req, res) => {
+  try {
+    const vouchers = await Voucher.deleteMany();
+    res.status(200).json({ message: "All vouchers deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 
 //get voucher by created by
@@ -60,36 +68,34 @@ const getVoucherById = async (req, res) => {
 // Create a new voucher
 const createVoucher = async (req, res) => {
   try {
-    const{VoucherID, VoucherName, VoucherType, VoucherImage, VoucherDescription, VoucherStartDate, VoucherEndDate, VoucherDiscount, VoucherMinValue, VoucherMaxValue, VoucherQuantity, VoucherStatus, AmountUsed, CreatedBy} = req.body;
-    if(!VoucherID || !VoucherName || !VoucherType || !VoucherImage || !VoucherDescription || !VoucherStartDate || !VoucherEndDate || !VoucherDiscount || !VoucherMinValue || !VoucherMaxValue || !VoucherQuantity || !VoucherStatus || !AmountUsed || !CreatedBy){
-    return res.status(400).json({ message: "Điền đầy đủ thông tin voucher" });
-    }
-    if (
-      VoucherDiscount < 0 ||
-      VoucherMinValue < 0 ||
-      VoucherMaxValue < 0 ||
-      VoucherQuantity < 0 ||
-      AmountUsed < 0 ||
-      VoucherDiscount > 100 ||
-      VoucherMinValue > VoucherMaxValue ||
-      VoucherQuantity > 100
-    ) {
-      return res
-        .status(400)
-        .json({ message: "Nhập thông tin voucher không hợp lệ các tham số không được âm" });
-    }
-    
-    if(VoucherQuantity >999)
-    {
-      return res.status(400).json({ message: "Số lượng voucher không được vượt quá 999" });
-    }
-    if(VoucherDiscount =100){
-      return res.status(400).json({ message: "Giảm giá không thể lớn hơn và bằng 100%" });
-    }
+    // const{VoucherID, VoucherName, VoucherType, VoucherImage, VoucherDescription, VoucherStartDate, VoucherEndDate, VoucherDiscount, VoucherMinValue, VoucherMaxValue, VoucherQuantity, VoucherStatus, AmountUsed, CreatedBy} = req.body;
+    // if(!VoucherID || !VoucherName || !VoucherType || !VoucherImage || !VoucherDescription || !VoucherStartDate || !VoucherEndDate || !VoucherDiscount || !VoucherMinValue || !VoucherMaxValue || !VoucherQuantity){
+    // return res.status(400).json({ message: "Điền đầy đủ thông tin voucher" });
+    // }
+    // if (
+    //   VoucherDiscount < 0 ||
+    //   VoucherMinValue < 0 ||
+    //   VoucherMaxValue < 0 ||
+    //   VoucherQuantity < 0 ||
+    //   AmountUsed < 0 ||
+    //   VoucherDiscount > 100 ||
+    //   VoucherMinValue > VoucherMaxValue
+    // ) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "Nhập thông tin voucher không hợp lệ các tham số không được âm" });
+    // }
+    // if(VoucherQuantity >999)
+    // {
+    //   return res.status(400).json({ message: "Số lượng voucher không được vượt quá 999" });
+    // }
+    // if(VoucherDiscount =100){
+    //   return res.status(400).json({ message: "Giảm giá không thể lớn hơn và bằng 100%" });
+    // }
 
 
     
-      const voucher = await Voucher.create(req.body);
+    const voucher = await Voucher.create(req.body);
     res.status(200).json({ voucher });  
   } catch (error) {
     res.status(500).json({ message: error.message });

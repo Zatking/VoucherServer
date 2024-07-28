@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 // This is the schema for the voucher model
 const voucherSchema = new mongoose.Schema({
- 
-  _id: {
+  VoucherID: {
     type: String,
     required: [true, "Please enter the voucher ID"],
     uniqe: true,
@@ -57,6 +56,7 @@ const voucherSchema = new mongoose.Schema({
     required: [true, "Please enter the voucher quantity"],
     default: 0,
   },
+
   VoucherStatus: {
     type: String,
     required: [true, "Please enter the voucher status"],

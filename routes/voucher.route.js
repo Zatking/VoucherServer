@@ -5,9 +5,9 @@ const {getVouchers, getVoucherById, createVoucher,deleteVoucher,updatedVoucher} 
 
 
 router.get('/getVoucher', getVouchers);
-router.get('/getVoucherById/:id', getVoucherById);
+router.post('/getVoucherById/:id', getVoucherById);
 router.post('/create', createVoucher);
-router.put('/update/:id', updatedVoucher);    
+router.post('/update/:id', updatedVoucher);    
 router.post('/delete/:id', deleteVoucher);
 
 if(getVouchers == null){
