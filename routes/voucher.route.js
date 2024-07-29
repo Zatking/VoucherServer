@@ -2,7 +2,7 @@ const express = require('express')
 const Voucher = require('../models/voucher.models.js')
 const router = express.Router()
 const {getVouchers, getVoucherById, createVoucher,deleteVoucher,updatedVoucher} = require('../Controller/voucher.controller.js')
-const {getPartNerRequests, getPartNerRequestById, createPartNerRequest, deletePartNerRequest} = require('../Controller/partNerRequest.js')
+const {getPartNerRequests, getPartNerRequestById, createPartNerRequest, deletePartNerRequest,getPartNerRequestByOrderId} = require('../Controller/partNerRequest.js')
 const {getCategories, getCategoryById, createCategory, deleteCategory} = require('../Controller/cate.controller.js')
 const {createHistory, getHistory, getHistoryById, deleteHistory} = require('../Controller/history.controller.js')
 
@@ -25,6 +25,7 @@ router.post('/createHistory', createHistory);
 router.get('/getHistory', getHistory);
 router.post('/getHistoryById/:id', getHistoryById);
 router.post('/deleteHistory/:id', deleteHistory);
+router.post('/getPartNerRequestByOrderId/:OrderId', getPartNerRequestByOrderId);
 
 if(getVouchers == null){
     console.log("getVouchers is null") 
