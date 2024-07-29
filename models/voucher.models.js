@@ -138,18 +138,23 @@ const useHistory = new mongoose.Schema({
   CustomerName:{
     type:String,
   },
-  Discount:{
-    type:Number,
-  },
   
 
 })
 
 
 const partNerRequestSchema = new mongoose.Schema({
-  _id:{
+  OrderID:{
+    type: String,
+    required: [true, "Please enter the order ID"],
+  },
+  PartnerID:{
     type: String,
     required: [true, "Please enter the partner request ID"],
+  },
+  PartnerName:{
+    type: String,
+    required: [true, "Please enter the partner name"],
   },
   ServiceCode:{
     type: String,
@@ -167,16 +172,26 @@ const partNerRequestSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter the customer code"],
   },
+  CustomerName:{
+    type: String,
+    required: [true, "Please enter the customer name"],
+  },
+  Description:{
+    type: String,
+    required: [true, "Please enter the description"],
+  },
+  
 })
 
 const Voucher = mongoose.model("Voucher", voucherSchema);
 const Partner = mongoose.model("Partner", partNerSchema);
 const Category = mongoose.model("Category", cateSchema);
 const UseHistory = mongoose.model("useHistory", useHistory);
-
+const PartnerRequest = mongoose.model("PartnerRequest", partNerRequestSchema);
 module.exports = {
   Voucher,
   Partner,
   Category,
   UseHistory,
+  PartnerRequest
 }
