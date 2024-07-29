@@ -11,8 +11,8 @@ const getPartNerRequests = async (req, res) => {
 
 const getPartNerRequestByOrderId = async (req, res) => {
     try {
-        const { OrderId } = req.params;
-        const partNerRequest = await PartNerRequest.find({ OrderId });
+        const { OrderId } = req.params.OrderId;
+        const partNerRequest = await PartNerRequest.findOne({ OrderId });
         res.status(200).json({ partNerRequest });
     } catch (error) {
         res.status(500).json({ message: error.message });
