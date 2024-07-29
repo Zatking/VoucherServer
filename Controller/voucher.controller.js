@@ -18,6 +18,9 @@ const getVouchers = async (req, res) => {
 
 
 
+
+
+
 //delete all vouchers 
 const deleteAllVouchers = async (req, res) => {
   try {
@@ -61,6 +64,7 @@ const getVoucherById = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 
@@ -145,6 +149,6 @@ module.exports = {
   deleteVoucher,
   getVoucherByCreatedBy,
   getVoucherByType,
-  
+  deleteAllVouchers
 };
 

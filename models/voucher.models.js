@@ -76,10 +76,7 @@ const voucherSchema = new mongoose.Schema({
   },
   
 
-  Timestamp: {
-    type: Date,
-    default: Date.now,
-  },
+
 });
 
 const partNerSchema = new mongoose.Schema({
@@ -148,6 +145,29 @@ const useHistory = new mongoose.Schema({
 
 })
 
+
+const partNerRequestSchema = new mongoose.Schema({
+  _id:{
+    type: String,
+    required: [true, "Please enter the partner request ID"],
+  },
+  ServiceCode:{
+    type: String,
+    required: [true, "Please enter the service code"],
+  },
+  ServiceName:{
+    type: String,
+    required: [true, "Please enter the service name"],
+  },
+  TotalMoney:{
+    type: Number,
+    required: [true, "Please enter the total money"],
+  },
+  CustomerCode:{
+    type: String,
+    required: [true, "Please enter the customer code"],
+  },
+})
 
 const Voucher = mongoose.model("Voucher", voucherSchema);
 const Partner = mongoose.model("Partner", partNerSchema);

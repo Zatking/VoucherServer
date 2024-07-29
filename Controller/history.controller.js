@@ -1,7 +1,7 @@
 const History = require("../models/voucher.models").UseHistory; // Import the history model
 
 //get all histories
-const getHistories = async (req, res) => {
+const getHistory = async (req, res) => {
   try {
     const histories = await History.find({});
     res.status(200).json({ histories });
@@ -43,7 +43,7 @@ const deleteHistory = async (req, res) => {
 }
 
 module.exports = {
-  getHistories,
+  getHistory,
   getHistoryById,
   createHistory,
   deleteHistory,
