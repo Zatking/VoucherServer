@@ -10,14 +10,16 @@ const getPartNerRequests = async (req, res) => {
 }
 
 const getPartNerRequestByOrderId = async (req, res) => {
-    try {
-        const { OrderId } = req.params.OrderId;
-        const partNerRequest = await PartNerRequest.findOne({ OrderId });
-        res.status(200).json({ partNerRequest });
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+   try{
+    const  OrderId  = req.params;
+    console.log(req.params);
+    const partNerRequest = await PartNerRequest.findOne(OrderId);
+    res.status(200).json({ partNerRequest });
+   }catch(error){
+    res.status(500).json({ message: error.message });
+   }
 }
+
 
 const getPartNerRequestById = async (req, res) => {
     try {
@@ -38,6 +40,16 @@ const createPartNerRequest = async (req, res) => {
     }
 }
 
+const deleteAllPartNerRequests = async (req, res) => {
+    try{
+        const partNerRequests = await PartNerRequest.deleteMany();
+        res.status(200).json({ message: "All partNerRequests deleted" });
+    }
+    catch(error){
+        res.status(500).json({ message: error.message });
+    }
+}
+
 const deletePartNerRequest = async (req, res) => {
     try {
         const { id } = req.params;
@@ -51,11 +63,13 @@ const deletePartNerRequest = async (req, res) => {
     }
 }
 
+
 module.exports = {
     getPartNerRequests,
     getPartNerRequestById,
     createPartNerRequest,
     deletePartNerRequest,
-    getPartNerRequestByOrderId
+    getPartNerRequestByOrderId,
+    deleteAllPartNerRequests
 }
 

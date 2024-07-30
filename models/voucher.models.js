@@ -144,37 +144,30 @@ const useHistory = new mongoose.Schema({
 
 
 const partNerRequestSchema = new mongoose.Schema({
-  //---------->Cái api này sẽ truyền qua hiếu để hiếu lấy dữ liệu thanh toán lun
 OrderID: {
   type: String,
   required: [true, "Please enter the order ID"],
 },
-
 PartnerID: {
   type: String,
   required: [true, "Please enter the partner request ID"],
 },
-
 ServiceName: {
   type: String,
   required: [true, "Please enter the service name"],
 },
-
 TotalMoney: {
   type: Number,
   required: [true, "Please enter the total money"],
 },
-
 CustomerCode: {
   type: String,
   required: [true, "Please enter the customer code"],
 },
-
 Description: {
   type: String,
   required: [true, "Please enter the description"],
 },
-
 LinkHome: {
   type: String,
   required: [true, "Please enter the link home"],
