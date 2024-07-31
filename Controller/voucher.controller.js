@@ -16,11 +16,6 @@ const getVouchers = async (req, res) => {
   }
 };
 
-
-
-
-
-
 //delete all vouchers 
 const deleteAllVouchers = async (req, res) => {
   try {
@@ -72,33 +67,6 @@ const getVoucherById = async (req, res) => {
 // Create a new voucher
 const createVoucher = async (req, res) => {
   try {
-    // const{VoucherID, VoucherName, VoucherType, VoucherImage, VoucherDescription, VoucherStartDate, VoucherEndDate, VoucherDiscount, VoucherMinValue, VoucherMaxValue, VoucherQuantity, VoucherStatus, AmountUsed, CreatedBy} = req.body;
-    // if(!VoucherID || !VoucherName || !VoucherType || !VoucherImage || !VoucherDescription || !VoucherStartDate || !VoucherEndDate || !VoucherDiscount || !VoucherMinValue || !VoucherMaxValue || !VoucherQuantity){
-    // return res.status(400).json({ message: "Điền đầy đủ thông tin voucher" });
-    // }
-    // if (
-    //   VoucherDiscount < 0 ||
-    //   VoucherMinValue < 0 ||
-    //   VoucherMaxValue < 0 ||
-    //   VoucherQuantity < 0 ||
-    //   AmountUsed < 0 ||
-    //   VoucherDiscount > 100 ||
-    //   VoucherMinValue > VoucherMaxValue
-    // ) {
-    //   return res
-    //     .status(400)
-    //     .json({ message: "Nhập thông tin voucher không hợp lệ các tham số không được âm" });
-    // }
-    // if(VoucherQuantity >999)
-    // {
-    //   return res.status(400).json({ message: "Số lượng voucher không được vượt quá 999" });
-    // }
-    // if(VoucherDiscount =100){
-    //   return res.status(400).json({ message: "Giảm giá không thể lớn hơn và bằng 100%" });
-    // }
-
-
-    
     const voucher = await Voucher.create(req.body);
     res.status(200).json({ voucher });  
   } catch (error) {
