@@ -24,7 +24,7 @@ router.post('/createHistory', createHistory);
 router.get('/getHistory', getHistory);
 router.post('/getHistoryById/:id', getHistoryById);
 router.post('/deleteHistory/:id', deleteHistory);
-router.get('/getPartNerRequestByOrderId/:OrderID', getPartNerRequestByOrderId);
+router.post('/getPartNerRequestByOrderId/:OrderID', getPartNerRequestByOrderId);
 router.delete('/deleteAllPartNerRequests', deleteAllPartNerRequests);
 if(getVouchers == null){
     console.log("getVouchers is null") 
