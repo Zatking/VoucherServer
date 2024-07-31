@@ -16,6 +16,26 @@ const getVouchers = async (req, res) => {
   }
 };
 
+// Update voucher quantity by id
+const updateVoucherQuantity = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const voucher = await Voucher.findById(id);
+
+    if (!voucher) {
+      return res.status(404).json({ message: "Voucher not found" });
+    }
+
+    voucher.quantity -= 1;
+    await voucher.save();
+
+    res.status(200).json({ message: "Voucher quantity updated" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 //delete all vouchers 
 
 
@@ -102,6 +122,8 @@ const deleteVoucher = async (req, res) => {
   }
 };
 
+
+
 //Delete all vouchers 
 const deleteAllVouchers = async (req, res) => {
   try {
@@ -120,6 +142,7 @@ module.exports = {
   deleteVoucher,
   getVoucherByCreatedBy,
   getVoucherByType,
-  deleteAllVouchers
+  deleteAllVouchers,
+  updateVoucherQuantity
 };
 
