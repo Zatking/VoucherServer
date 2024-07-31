@@ -1,7 +1,7 @@
 const express = require('express')
 const Voucher = require('../models/voucher.models.js')
 const router = express.Router()
-const {getVouchers, getVoucherById, createVoucher,deleteVoucher,updatedVoucher,deleteAllVouchers,updateVoucherQuantity} = require('../Controller/voucher.controller.js')
+const {getVouchers, getVoucherById, createVoucher,deleteVoucher,updatedVoucher,deleteAllVouchers,getVoucherByVoucherID} = require('../Controller/voucher.controller.js')
 const {getPartNerRequests, getPartNerRequestById, createPartNerRequest, deletePartNerRequest,getPartNerRequestByOrderId,deleteAllPartNerRequests} = require('../Controller/partNerRequest.js')
 const {getCategories, getCategoryById, createCategory, deleteCategory} = require('../Controller/cate.controller.js')
 const {createHistory, getHistory, getHistoryById, deleteHistory} = require('../Controller/history.controller.js')
@@ -33,5 +33,5 @@ router.post('/createPaymentRequest', createPaymentRequest);
 router.delete('/deleteAllPaymentRequests', deleteAllPaymentRequests);
 router.post('/deletePaymentRequest/:id', deletePaymentRequest);
 router.delete('/deleteAllVouchers', deleteAllVouchers);
-router.post('/updateVoucherQuantity/:id', updateVoucherQuantity);
+router.post('/getVoucherByVoucherID/:id', getVoucherByVoucherID);
 module.exports = router

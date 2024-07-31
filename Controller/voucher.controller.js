@@ -16,25 +16,23 @@ const getVouchers = async (req, res) => {
   }
 };
 
-// Update voucher quantity by id
-const updateVoucherQuantity = async (req, res) => {
-  try {
-    const {PVoucherID} = req.params;
 
-    const voucher = await Voucher.findOne({VoucherID});
 
-    if (!voucher) {
-      return res.status(404).json({ message: "Voucher not found" });
-    }
 
-    voucher.VoucherQuantity -= 1;
-    await voucher.save();
 
-    res.status(200).json({ message: "Voucher quantity updated" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+
+const getVoucherByVoucherID = async (req, res) => {
+  try{
+   const  {VoucherID}  = req.params;
+   console.log(req.params);
+   const voucher = await Voucher.findOne(VoucherID);
+   voucher.VoucherQuantity = voucher.VoucherQuantity - 1;
+   voucher.save();
+   res.status(200).json({ voucher });
+  }catch(error){
+   res.status(500).json({ message: error.message });
   }
-};
+}
 
 //delete all vouchers 
 
@@ -143,6 +141,6 @@ module.exports = {
   getVoucherByCreatedBy,
   getVoucherByType,
   deleteAllVouchers,
-  updateVoucherQuantity
+  getVoucherByVoucherID
 };
 
