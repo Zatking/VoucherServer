@@ -164,6 +164,7 @@ const useHistory = new mongoose.Schema({
 })
 
 
+
 const partNerRequestSchema = new mongoose.Schema({
 OrderID: {
   type: String,
@@ -201,15 +202,62 @@ LinkReturnSuccess: {
 // ---------->lấy này để hiếu cập nhập trạng thái trang của tụi tui
 });
 
+const paymentRequestSchema = new mongoose.Schema({
+  OrderID: {
+    type: String,
+    required: [true, "Please enter the order ID"],
+  },
+  PartnerID: {
+    type: String,
+    required: [true, "Please enter the partner request ID"],
+  },
+  ServiceName: {
+    type: String,
+    required: [true, "Please enter the service name"],
+  },
+  TotalMoney: {
+    type: Number,
+    required: [true, "Please enter the total money"],
+  },
+  CustomerCode: {
+    type: String,
+    required: [true, "Please enter the customer code"],
+  },
+  Description: {
+    type: String,
+    required: [true, "Please enter the description"],
+  },
+  LinkHome: {
+    type: String,
+    required: [true, "Please enter the link home"],
+  },
+  // ---------->lấy này để hiếu trả về trang của tụi tui
+  LinkReturnSuccess: {
+    type: String,
+    required: [true, "Please enter the link return success"],
+  },
+  VoucherID: {
+    type: String,
+    required: [true, "Please enter the voucher ID"],
+  },
+  TotalMoneyAfterDiscount: {
+    type: Number,
+    required: [true, "Please enter the total money after discount"],
+  },
+  
+})
+
 const Voucher = mongoose.model("Voucher", voucherSchema);
 const Partner = mongoose.model("Partner", partNerSchema);
 const Category = mongoose.model("Category", cateSchema);
 const UseHistory = mongoose.model("useHistory", useHistory);
 const PartnerRequest = mongoose.model("PartnerRequest", partNerRequestSchema);
+const PaymentRequest = mongoose.model("PaymentRequest", paymentRequestSchema);
 module.exports = {
   Voucher,
   Partner,
   Category,
   UseHistory,
-  PartnerRequest
+  PartnerRequest,
+  PaymentRequest
 }
