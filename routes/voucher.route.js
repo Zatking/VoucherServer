@@ -1,11 +1,11 @@
 const express = require('express')
 const Voucher = require('../models/voucher.models.js')
 const router = express.Router()
-const {getVouchers, getVoucherById, createVoucher,deleteVoucher,updatedVoucher} = require('../Controller/voucher.controller.js')
+const {getVouchers, getVoucherById, createVoucher,deleteVoucher,updatedVoucher,deleteAllVouchers} = require('../Controller/voucher.controller.js')
 const {getPartNerRequests, getPartNerRequestById, createPartNerRequest, deletePartNerRequest,getPartNerRequestByOrderId,deleteAllPartNerRequests} = require('../Controller/partNerRequest.js')
 const {getCategories, getCategoryById, createCategory, deleteCategory} = require('../Controller/cate.controller.js')
 const {createHistory, getHistory, getHistoryById, deleteHistory} = require('../Controller/history.controller.js')
-
+const {getPaymentRequests,getPaymentRequestsById,getPaymentRequestsByOrderId,createPaymentRequest,deleteAllPaymentRequests,deletePaymentRequest} = require('../Controller/payment.controller.js')
 
 router.get('/getVoucher', getVouchers);
 router.post('/getVoucherById/:id', getVoucherById);
@@ -26,7 +26,12 @@ router.post('/getHistoryById/:id', getHistoryById);
 router.post('/deleteHistory/:id', deleteHistory);
 router.post('/getPartNerRequestByOrderId/:OrderID', getPartNerRequestByOrderId);
 router.delete('/deleteAllPartNerRequests', deleteAllPartNerRequests);
-if(getVouchers == null){
-    console.log("getVouchers is null") 
-}
+router.post('/getPaymentRequests', getPaymentRequests);
+router.post('/getPaymentRequestsById/:id', getPaymentRequestsById);
+router.post('/getPaymentRequestsByOrderId/:OrderId', getPaymentRequestsByOrderId);
+router.post('/createPaymentRequest', createPaymentRequest);
+router.delete('/deleteAllPaymentRequests', deleteAllPaymentRequests);
+router.post('/deletePaymentRequest/:id', deletePaymentRequest);
+router.delete('/deleteAllVouchers', deleteAllVouchers);
+
 module.exports = router

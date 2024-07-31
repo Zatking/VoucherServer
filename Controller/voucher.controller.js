@@ -17,14 +17,7 @@ const getVouchers = async (req, res) => {
 };
 
 //delete all vouchers 
-const deleteAllVouchers = async (req, res) => {
-  try {
-    const vouchers = await Voucher.deleteMany();
-    res.status(200).json({ message: "All vouchers deleted" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
+
 
 
 //get voucher by created by
@@ -108,6 +101,16 @@ const deleteVoucher = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//Delete all vouchers 
+const deleteAllVouchers = async (req, res) => {
+  try {
+    const vouchers = await Voucher.deleteMany();
+    res.status(200).json({ message: "All vouchers deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
 module.exports = {
   getVouchers,
