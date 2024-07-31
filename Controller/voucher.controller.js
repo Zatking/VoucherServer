@@ -19,9 +19,9 @@ const getVouchers = async (req, res) => {
 // Update voucher quantity by id
 const updateVoucherQuantity = async (req, res) => {
   try {
-    const VoucherID = req.params;
+    const {PVoucherID} = req.params;
 
-    const voucher = await Voucher.findOne(VoucherID);
+    const voucher = await Voucher.findOne({VoucherID});
 
     if (!voucher) {
       return res.status(404).json({ message: "Voucher not found" });
